@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  test:
+    steps:
+      - id: generate-image-metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: foo-bar
+          flavor: |
+            latest=false
+          tags: |
+            type=sha,format=short,prefix=
+            type=raw,value=imminent
+          labels: |
+          org.opencontainers.image.source=internal
+          org.opencontainers.image.url=https://plextrac.com
