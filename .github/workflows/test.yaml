@@ -20,3 +20,5 @@ jobs:
           labels: |
             org.opencontainers.image.source=internal
             org.opencontainers.image.url=https://plextrac.com
+      - name: Print short sha
+        run: echo ${{ github.sha }} | cut -c1-7
