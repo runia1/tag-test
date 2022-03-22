@@ -20,11 +20,8 @@ jobs:
           labels: |
             org.opencontainers.image.source=internal
             org.opencontainers.image.url=https://plextrac.com
-      - name: Print short sha
-        run: echo ${{ github.sha }} | cut -c1-7
-        
       - name: Checkout
         uses: actions/checkout@v3
         with:
           repository: runia1/tag-test
-          ref: ${{ github.sha }} | cut -c1-7
+          ref: $(${{ github.sha }} | cut -c1-7)
