@@ -5,6 +5,7 @@ on:
   
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - id: generate-image-metadata
         uses: docker/metadata-action@v3
@@ -16,5 +17,5 @@ jobs:
             type=sha,format=short,prefix=
             type=raw,value=imminent
           labels: |
-          org.opencontainers.image.source=internal
-          org.opencontainers.image.url=https://plextrac.com
+            org.opencontainers.image.source=internal
+            org.opencontainers.image.url=https://plextrac.com
