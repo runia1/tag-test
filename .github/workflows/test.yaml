@@ -14,8 +14,9 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=sha,format=short,prefix=
-            type=raw,value=imminent
+            type=sha,prefix=,format=short
+            type=ref,event=branch,prefix={{sha}}-
+            type=ref,event=pr,prefix={{sha}}-
           labels: |
             org.opencontainers.image.source=internal
             org.opencontainers.image.url=https://plextrac.com
