@@ -3,6 +3,9 @@ name: Test
 on:
   workflow_dispatch:
   
+env:
+  SHORT_SHA: $(echo ${{ github.sha }} | cut -c1-7)
+  
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,4 +27,4 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: runia1/tag-test
-          ref: ${{ github.sha }}
+          ref: ${{ env.SHORT_SHA }}
