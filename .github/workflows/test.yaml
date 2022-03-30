@@ -15,6 +15,6 @@ jobs:
       - name: Get the semver tag
         id: semver
         run: |
-          echo "::set-output name=number::$($GITHUB_REF##*/)"
+          echo "::set-output name=number::${{ github.ref_name }}"
       - name: Print output
         run: echo ${{ steps.semver.outputs.number }}
