@@ -1,7 +1,12 @@
 name: Test
 
 on:
-  workflow_dispatch:
+  #workflow_dispatch:
+  
+  release:
+    types:
+      - created
+      - edited
   
 env:
   SHORT_SHA: $(echo ${{ github.sha }} | cut -c1-7)
@@ -10,21 +15,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - id: generate-image-metadata
-        uses: docker/metadata-action@v3
-        with:
-          images: foo-bar
-          flavor: |
-            latest=false
-          tags: |
-            type=sha,prefix=,format=short
-            type=ref,event=branch,prefix={{sha}}-
-            type=ref,event=pr,prefix={{sha}}-
-          labels: |
-            org.opencontainers.image.source=internal
-            org.opencontainers.image.url=https://plextrac.com
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          repository: runia1/tag-test
-          ref: ${{ env.SHORT_SHA }}
+      - name: Get the semver tag
+        id: semver
+        run: |
+          echo "::set-output name=number::$(${{ env.GITHUB_REF }}##*/)"
+      - name: Print output
+        run: echo ${{ steps.semver.outputs.number }}
